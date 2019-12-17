@@ -5,6 +5,21 @@ output: html_document
 
 (Code taken from [StackOverflow](https://stackoverflow.com/questions/50352614/r-markdown-how-can-i-make-rstudio-display-python-plots-inline-instead-of-in-new))
 
+```{r knit_setup, include=FALSE, echo=FALSE}
+knitr::opts_knit$set(root.dir = getwd())
+print(knitr::opts_knit$get("root.dir"))
+
+```
+
+```{r qt_plugin, echo=FALSE}
+Sys.setenv(QT_PLUGIN_PATH = paste(
+  "C:/Program Files/RStudio/bin/plugins"
+  , "~/../AppData/Local/Continuum/anaconda3/Library/plugins"
+  , sep = ";"
+))
+
+```
+
 ```{python pyplot, echo = FALSE, results = 'hide'}
 import matplotlib.pyplot as plt
 import numpy as np
@@ -20,4 +35,5 @@ ax.set(xlabel='time (s)', ylabel='voltage (mV)',
 ax.grid()
 
 plt.show()
+
 ```
