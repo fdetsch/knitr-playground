@@ -11,15 +11,6 @@ print(knitr::opts_knit$get("root.dir"))
 
 ```
 
-```{r qt_plugin, echo=FALSE}
-Sys.setenv(QT_PLUGIN_PATH = paste(
-  "C:/Program Files/RStudio/bin/plugins"
-  , "~/../AppData/Local/Continuum/anaconda3/Library/plugins"
-  , sep = ";"
-))
-
-```
-
 ```{python pyplot, echo = FALSE, results = 'hide'}
 import matplotlib.pyplot as plt
 import numpy as np
