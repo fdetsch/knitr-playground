@@ -2,16 +2,14 @@
 title: "Render `ggplotly()` graphs in `github_document`"
 author: "fdetsch"
 date: "`r Sys.Date()`"
-output:
-  html_document:
-    keep_md: true
+output: github_document
 ---
 
 (available online [here](https://stackoverflow.com/questions/61253015/render-ggplotly-in-r-markdown-github-document))
 
 Here is the graph I generated. 
 
-```{r setup, message = FALSE, echo = FALSE, warning=FALSE}
+```{r plotly, message = FALSE, echo = FALSE, warning = FALSE}
 # Require
 library(plotly)
 # Create
@@ -19,5 +17,19 @@ dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
 # Plot
 g <- qplot(carat, price, data=dsamp, colour=clarity)
 # Call
-ggplotly(g)
+p <- ggplotly(g)
+htmlwidgets::saveWidget(p, "index.html")
+
+```
+
+```{r include, echo = FALSE}
+htmltools::tags$iframe(
+  src=normalizePath("index.html"),
+  width="100%",
+  height="600",
+  scrolling="no",
+  seamless="seamless",
+  frameBorder="0"
+)
+
 ```
