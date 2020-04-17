@@ -3,8 +3,8 @@ title: "Render `ggplotly()` graphs in `github_document`"
 author: "fdetsch"
 date: "`r Sys.Date()`"
 output:
-  md_document:
-    variant: markdown_github
+  html_document:
+    keep_md: true
 ---
 
 (available online [here](https://stackoverflow.com/questions/61253015/render-ggplotly-in-r-markdown-github-document))
