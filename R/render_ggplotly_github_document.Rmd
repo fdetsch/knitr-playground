@@ -2,7 +2,9 @@
 title: "Render `ggplotly()` graphs in `github_document`"
 author: "fdetsch"
 date: "`r Sys.Date()`"
-output: github_document
+output: 
+  html_document: 
+    keep_md: true
 ---
 
 (available online [here](https://stackoverflow.com/questions/61253015/render-ggplotly-in-r-markdown-github-document))
@@ -18,11 +20,13 @@ dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
 g <- qplot(carat, price, data=dsamp, colour=clarity)
 # Call
 p <- ggplotly(g)
-htmlwidgets::saveWidget(p, "index.html")
+p
 
 ```
 
-```{r include, echo = FALSE}
+```{r include, echo = FALSE, eval = FALSE}
+htmlwidgets::saveWidget(p, "index.html")
+
 htmltools::tags$iframe(
   src=normalizePath("index.html"),
   width="100%",
