@@ -10,7 +10,7 @@ Here is the graph I generated.
 
 <!--html_preserve-->
 
-<iframe src="index.html" width="100%" height="600" scrolling="no" seamless="seamless" frameBorder="0">
+<iframe src="https://github.com/fdetsch/knitr-playground/blob/master/R/index.html" width="100%" height="600" scrolling="no" seamless="seamless" frameBorder="0">
 
 </iframe>
 
