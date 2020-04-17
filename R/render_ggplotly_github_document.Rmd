@@ -1,9 +1,10 @@
 ---
-title: "RmarkdownExample"
+title: "Render `ggplotly()` graphs in `github_document`"
 author: "fdetsch"
-date: "April 16, 2020"
-output: 
-  github_document
+date: "`r Sys.Date()`"
+output:
+  md_document:
+    variant: markdown_github
 ---
 
 (available online [here](https://stackoverflow.com/questions/61253015/render-ggplotly-in-r-markdown-github-document))
