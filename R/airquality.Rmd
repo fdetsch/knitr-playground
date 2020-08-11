@@ -1,0 +1,57 @@
+---
+title: New York Air Quality Measurements
+output: html_document
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+
+```
+
+```{r pkgs}
+library(data.table)
+library(crosstalk)
+library(plotly)
+
+```
+
+```{r timeseries}
+dat = data.table(airquality)
+dat[
+  , Date := as.Date(paste(1973, Month, Day, sep = "-"))
+]
+
+# Wrap data frame in SharedData
+sd = SharedData$new(dat)
+
+# Create a filter input
+filter_slider("Date", "Date", sd, column = ~ Date, step = 1, width = 250)
+
+# Use SharedData like a dataframe with Crosstalk-enabled widgets
+bscols(
+  plot_ly(data = sd, type = 'scatter', mode = 'markers', x = ~ Date, y = ~ Temp)
+  , ggplotly(ggplot(aes(x = Date, y = Temp), data = sd) + geom_point())
+)
+
+```
+
+```{r barchart}
+# Wrap data frame in SharedData
+sd1 = SharedData$new(mpg)
+
+# Create a filter input
+filter_slider("Year", "Year", sd1, column = ~ year, step = 1, width = 250)
+
+bscols(
+  ggplotly(
+    ggplot(aes(x = class), data = sd1) + 
+      geom_bar() # aes(y = ..count../sum(..count..))
+  )
+  # , ggplotly(
+  #   ggplot(aes(x = class), data = sd1) + 
+  #     geom_histogram(stat = "count")
+  # )
+)
+
+```
+
