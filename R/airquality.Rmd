@@ -40,18 +40,44 @@ bscols(
 sd1 = SharedData$new(mpg)
 
 # Create a filter input
-filter_slider("Year", "Year", sd1, column = ~ year, step = 1, width = 250)
+filter_slider("year", "Year", sd1, column = ~ year, step = 1, width = 250)
 
 bscols(
+  # geom_bar()
   ggplotly(
     ggplot(aes(x = class), data = sd1) + 
       geom_bar() # aes(y = ..count../sum(..count..))
   )
+  # # geom_point()
+  # , ggplotly(
+  #   ggplot(aes(hwy, cty), data = sd1) + 
+  #     geom_point()
+  # )
+  # add_bars()
+  , plot_ly(sd1) %>%
+    group_by(class) %>%
+    summarise(count = dplyr::n() / nrow(mpg)) %>%
+    add_bars(x = ~ class, y = ~ count)
   # , ggplotly(
   #   ggplot(aes(x = class), data = sd1) + 
   #     geom_histogram(stat = "count")
   # )
 )
+
+```
+
+```{r}
+library(dplyr)
+
+df <- crosstalk::SharedData$new(mpg)$data() %>%
+  group_by(year, class) %>%
+  count() %>%
+  mutate(year = as.factor(year))
+  
+df %>%
+  plot_ly(x = ~class, y = ~n, color = ~year) %>%
+  add_bars() %>%
+  layout(barmode = "stack")
 
 ```
 
